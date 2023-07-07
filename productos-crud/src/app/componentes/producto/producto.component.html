@@ -1,0 +1,73 @@
+<title>PRODUCTOS</title>
+<div class="row">
+
+    <div class="col-sm-5">
+           
+            <div class="titulos">CONTROL DE PRODUCTOS</div>
+            <table class="table">
+                <thead class="thead-dark">
+
+                <tr>
+                    <td>Codigo:</td>
+                    <td><input class="form-control" type="text" name="txtId_producto" [(ngModel)]="id_producto"></td>
+                </tr>
+                <tr>
+                    <td>Nombre:</td>
+                    <td><input class="form-control" type="text" name="txtNombre" [(ngModel)]="nombre"></td>
+                </tr>
+                <tr>
+                    <td>Descripcion:</td>
+                    <td><input class="form-control" type="text" name="txtDescripcion" [(ngModel)]="descripcion"></td>
+                </tr>
+                <tr>
+                    <td>Stock:</td>
+                    <td><input class="form-control" type="text" name="txtStock" [(ngModel)]="stock"></td>
+                </tr>
+                <tr>
+                    <td>Precio:</td>
+                    <td><input class="form-control" type="text" name="txtPrecio" [(ngModel)]="precio"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <button class="btn btn-outline-primary" (click)="agregar()">Agregar</button>
+                        <button class="btn btn-outline-primary" (click)="modificar()">Modificar</button>
+                        <button class="btn btn-outline-danger" (click)="eliminar()">Eliminar</button>
+                    </td>
+                </tr>
+
+                </thead>
+            </table>
+
+        <div class="boton-busqueda">
+            <input class="form-control" type="text" [(ngModel)] = "busqueda"
+            (keyup)="filtrado()" placeholder="Producto a buscar">
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+    <div class="col-sm-6">
+        <div class="titulos">PRODUCTOS</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Nombre</td>
+                    <td>Descripcion</td>
+                    <td>Stock</td>
+                    <td>Precio S/.</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pro of productos | paginate: { itemsPerPage: pageSize, currentPage: p }">
+                    <td>{{pro.codigo}}</td> 
+                    <td (click)="seleccionar(pro)">{{pro.nombre}}</td>
+                    <td>{{pro.descripcion}}</td>
+                    <td>{{pro.stock}}</td>
+                    <td>{{pro.precio}}</td>
+                </tr>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </tbody>
+        
+        </table>   
+       
+    </div>
+</div>
